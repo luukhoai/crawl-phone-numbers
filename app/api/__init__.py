@@ -4,6 +4,7 @@ from marshmallow.exceptions import MarshmallowError
 from requests.exceptions import RequestException
 
 from .main_api import MainApiResource
+from .healthcheck import HealthCheck
 from ..common.error_handling import handle_validation_error
 
 
@@ -27,3 +28,4 @@ main_api = MainApi(api_bp)
 
 
 main_api.add_resource(MainApiResource, '/getphonenumber')
+main_api.add_resource(HealthCheck, '/healthcheck')

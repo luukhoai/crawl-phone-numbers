@@ -1,0 +1,5 @@
+**/__pycache__
+.coverage
+config/production.cfg
+.venv
+.tox
