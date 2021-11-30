@@ -24,7 +24,7 @@ IV. Unittest
   - tox -e unittests
 ```
 
-V. Integration tests
+V. Integration tests (Internet connection required)
 ```
   - docker build --tag app .
   - tox -e integration-tests
