@@ -26,5 +26,12 @@ IV. Unittest
 
 V. Integration tests
 ```
+  - docker build --tag app .
   - tox -e integration-tests
 ```
+
+VI. Coverage
+```
+- python -m pytest --cov=app
+```
+![alt text](./static/coverage/coverage.png)
