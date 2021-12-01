@@ -28,11 +28,11 @@ class GoogleFindPhone(object):
         elif response['status'] == 'ZERO_RESULTS':
             app.logger.info(f'Not found any place_id with address: {text}')
             return []
-        elif response['status'] == 'INVALID_REQUEST':
-            error_message = response.get('error_message', None)
+        error_message = response.get('error_message', None)
+        if response['status'] == 'INVALID_REQUEST':
             raise BadRequest(error_message)
         else:
-            raise InternalServerError()
+            raise InternalServerError(error_message)
 
     def _find_phone_numb_from_place_id(self, place_id):
         '''
@@ -54,11 +54,11 @@ class GoogleFindPhone(object):
         elif response['status'] in ['ZERO_RESULTS', 'NOT_FOUND']:
             app.logger.info(f'Not found phone_number with place_id: {place_id}')
             return False
-        elif response['status'] == 'INVALID_REQUEST':
-            error_message = response.get('error_message', None)
+        error_message = response.get('error_message', None)
+        if response['status'] == 'INVALID_REQUEST':
             raise BadRequest(error_message)
         else:
-            raise InternalServerError()
+            raise InternalServerError(error_message)
 
     def find_phone_number_from_text(self, text):
         '''
