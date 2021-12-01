@@ -20,7 +20,7 @@ class IntegrationTestApp(BaseTestCase):
         self.assertEqual(response.status_code, HTTPStatus.BAD_REQUEST)
 
     def test_get_zero_result(self):
-        url = 'http://localhost:5000/getphonenumber?address=asdasd'
+        url = 'http://localhost:5000/getphonenumber?address=11111111111111111'
         response = self.client.get(url)
         data = response.get_json()
         self.assertEqual(response.status_code, HTTPStatus.OK)
