@@ -64,8 +64,7 @@ def _mock_url(*args, place, detail):
     url = args[0]
     if 'findplacefromtext' in url:
         return place()
-    else:
-        return detail()
+    return detail()
 
 
 def mock_get_place_success(*args):
