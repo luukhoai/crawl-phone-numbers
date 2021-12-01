@@ -25,6 +25,8 @@ IV. Unittest
 ```
 
 V. Integration tests (Internet connection required)
+
+*The google place's API may update the response, so these tests may be failed*
 ```
   - docker build --tag app .
   - tox -e integration-tests
