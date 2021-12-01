@@ -36,7 +36,8 @@ def _mock_get_zero_results():
 
 def _mock_get_invalid_request():
     return MockResponse({
-        'status': 'INVALID_REQUEST'
+        'status': 'INVALID_REQUEST',
+        'error_message': 'Invalid request'
     })
 
 
@@ -48,7 +49,8 @@ def _mock_get_not_found():
 
 def _mock_internal_error():
     return MockResponse({
-        'status': 'UNKNOWN_ERROR'
+        'status': 'UNKNOWN_ERROR',
+        'error_message': 'Internal error'
     })
 
 

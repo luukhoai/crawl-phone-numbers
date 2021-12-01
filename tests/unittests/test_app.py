@@ -37,19 +37,25 @@ class UnittestTestApp(BaseTestCase):
     def test_get_place_invalid(self, *args):
         url = '/getphonenumber?address={}'.format(self.address)
         response = self.client.get(url)
+        data = response.get_json()
         self.assertEqual(response.status_code, HTTPStatus.BAD_REQUEST)
+        self.assertEqual(data['errors'], 'Invalid request')
 
     @patch('app.services.google_place.requests.get', side_effect=mocks.mock_get_place_internal)
     def test_get_place_internal(self, *args):
         url = '/getphonenumber?address={}'.format(self.address)
         response = self.client.get(url)
+        data = response.get_json()
         self.assertEqual(response.status_code, HTTPStatus.INTERNAL_SERVER_ERROR)
+        self.assertEqual(data['errors'], 'Internal error')
 
     @patch('app.services.google_place.requests.get', side_effect=mocks.mock_get_place_raise_exception)
     def test_get_place_raise_exception(self, *args):
         url = '/getphonenumber?address={}'.format(self.address)
         response = self.client.get(url)
+        data = response.get_json()
         self.assertEqual(response.status_code, HTTPStatus.BAD_REQUEST)
+        self.assertEqual(data['errors'], 'Exception')
 
     @patch('app.services.google_place.requests.get', side_effect=mocks.mock_get_detail_zero_result)
     def test_get_detail_zero_result(self, *args):
@@ -71,23 +77,31 @@ class UnittestTestApp(BaseTestCase):
     def test_get_detail_invalid(self, *args):
         url = '/getphonenumber?address={}'.format(self.address)
         response = self.client.get(url)
+        data = response.get_json()
         self.assertEqual(response.status_code, HTTPStatus.BAD_REQUEST)
+        self.assertEqual(data['errors'], 'Invalid request')
 
     @patch('app.services.google_place.requests.get', side_effect=mocks.mock_get_detail_internal)
     def test_get_detail_internal(self, *args):
         url = '/getphonenumber?address={}'.format(self.address)
         response = self.client.get(url)
+        data = response.get_json()
         self.assertEqual(response.status_code, HTTPStatus.INTERNAL_SERVER_ERROR)
+        self.assertEqual(data['errors'], 'Internal error')
 
     @patch('app.services.google_place.requests.get', side_effect=mocks.mock_get_detail_raise_exception)
     def test_get_detail_raise_exception(self, *args):
         url = '/getphonenumber?address={}'.format(self.address)
         response = self.client.get(url)
+        data = response.get_json()
         self.assertEqual(response.status_code, HTTPStatus.BAD_REQUEST)
+        self.assertEqual(data['errors'], 'Exception')
 
     @patch('app.services.google_place.GoogleFindPhone.find_phone_number_from_text',
            side_effect=mocks.mock_raise_marshmallow_exeption)
     def test_get_raise_marshmallow_error(self, *args):
         url = '/getphonenumber?address={}'.format(self.address)
         response = self.client.get(url)
+        data = response.get_json()
         self.assertEqual(response.status_code, HTTPStatus.BAD_REQUEST)
+        self.assertEqual(data['errors'], 'Exception')
